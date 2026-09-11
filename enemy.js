@@ -1,3 +1,5 @@
+import { player } from "./player.js";
+
 export const monsterTypes = [
     {
         name: 'slime',
@@ -31,8 +33,14 @@ export const monsterTypes = [
 
 
 export function generateMonsters(){
-    var generatedMonster = monsterTypes[Math.floor(Math.random() * monsterTypes.length)];
-    return generatedMonster;
+    var generatedMonster  = monsterTypes[Math.floor(Math.random() * monsterTypes.length)];
+    return structuredClone(generatedMonster); //makes clone of original so original blueprint never changes
 }
 
 export var monster = generateMonsters();
+
+export function enemydied(){
+    console.log(`${monster.name} died!`);
+    player.gold += monster.gold;
+    player.xp += monster.xp 
+}

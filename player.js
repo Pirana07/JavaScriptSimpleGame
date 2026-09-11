@@ -1,6 +1,6 @@
-import { monster } from "./enemy.js";
+import { monster, enemydied } from "./enemy.js";
 
-const player = {
+export const player = {
     name: "pirana",
     health: 100,
     defence: 10,
@@ -11,16 +11,22 @@ const player = {
     xp: 0,
     gold: 0,
 }
-var damage = 0; // damage dealt to enemy
+let damage = 0; // damage dealt to enemy
 
 
 export function attack(){
-    var isItCrit = Number(Math.random(0, 1) < player.critChance);
+    if(monster.health <= 0) return;
+
+    let isItCrit = Number(Math.random() < player.critChance);
     if(isItCrit){
         damage = (player.attack * player.critDamage);
     }else{
         damage = player.attack;
     }
     monster.health -= damage;
-    console.log(monster.name + " has left " + monster.health + "hp");
+    console.log(monster.name + " has " + monster.health + "hp left!");
+
+  if (monster.health <= 0) {
+        enemydied();
+  }
 }

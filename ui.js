@@ -15,3 +15,6 @@ function usingButton(buttonName, buttonFunction){
     const spawnButton = document.getElementById(buttonName);
     spawnButton.addEventListener('click', buttonFunction);
 }
+ if(monster.health <= 0){
+    enemydied();
+    }
