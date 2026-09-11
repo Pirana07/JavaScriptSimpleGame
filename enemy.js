@@ -32,6 +32,7 @@ export const monsterTypes = [
 
 export function generateMonsters(){
     var generatedMonster = monsterTypes[Math.floor(Math.random() * monsterTypes.length)];
-    return generatedMonster.name;
+    return generatedMonster;
 }
 
+export var monster = generateMonsters();

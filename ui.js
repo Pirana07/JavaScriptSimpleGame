@@ -1,7 +1,17 @@
-import { monsterTypes, generateMonsters } from "./enemy.js";
+import { monster } from "./enemy.js";
+import { attack } from "./player.js";
+
+usingButton('spawn-btn', spawnMonster); //monster spawn button
 
 function spawnMonster(){
-    alert(generateMonsters());
+    alert("You have summond " + monster.name);
 }
-const spawnButton = document.getElementById('spawn-btn');
-spawnButton.addEventListener('click', spawnMonster);
+
+usingButton('attack-btn', attack); //player attack button
+
+
+
+function usingButton(buttonName, buttonFunction){
+    const spawnButton = document.getElementById(buttonName);
+    spawnButton.addEventListener('click', buttonFunction);
+}
