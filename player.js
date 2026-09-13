@@ -1,9 +1,9 @@
-import { enemyDefeated } from "./enemy.js";
-import { monster, enemyAttack} from "./enemy.js";
+import { enemyDefeated, monster, enemyAttack } from "./enemy.js";
+import { uiState } from "./ui.js";
 
 export const player = {
     name: "pirana",
-    health: 5,
+    health: 100,
     maxHealth: 100,
     attack: 5,
     mana: 20,
@@ -13,26 +13,17 @@ export const player = {
     xp: 0,
     gold: 0,
 }
-let damage = 0; // damage dealt to enemy
-
 
 export function attack(){
     if(monster.health <= 0) return;
 
-    let isItCrit = Number(Math.random() < player.critChance);
-    if(isItCrit){
-        damage = (player.attack * player.critDamage);
-    }else{
-        damage = player.attack;
-    }
-    monster.health -= damage;
+    monster.health -= playerDamage();
     console.log(monster.name + " has " + monster.health + "hp left!");
-
-  if (monster.health <= 0) {
+    if (monster.health <= 0) {
         enemyDefeated();
-  }else{
-    enemyAttack();
-  }
+     }else{
+        enemyAttack();
+    } 
 }
 
 export function heal(){
@@ -40,7 +31,18 @@ export function heal(){
     console.log("player healed and has " + player.health + "hp")
 }
 
+export function rewardGain(){
+    player.gold += monster.gold;
+    player.xp += monster.xp;
+    console.log ("player Xp: " + player.xp + " player gold: " + player.gold);
+}
+
 export function playerDied(){
-    alert("You died! Refreshing....");
-    location.reload();
+    uiState("Game Over");
+}
+
+function playerDamage(){
+    let isItCrit = Math.random() < player.critChance;
+    if(isItCrit) return player.attack * player.critDamage;
+    return player.attack; 
 }

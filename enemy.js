@@ -1,6 +1,6 @@
-import { player, playerDied } from "./player.js";
+import { player, playerDied, rewardGain } from "./player.js";
 import { Monster } from "./monster.model.js"
-import {buttonState} from "./ui.js"
+import {uiState} from "./ui.js"
 
 export const monsterTypes = [
     {
@@ -43,9 +43,8 @@ export function generateMonster() {
 export let monster = new Monster(...Object.values(generateMonster()));
 
 export function spawnMonster() {
-    monster = generateMonster()
-    alert("You have summond " + monster.name);
-    buttonState("attack-btn", "");
+    monster = generateMonster();
+    uiState("Spawn Enemy");
 }
 
 export function enemyAttack(){
@@ -61,9 +60,7 @@ export function enemyAttack(){
 
 
 export function enemyDefeated() {
-    buttonState("attack-btn", "none");
+    rewardGain();
     console.log(`${monster.name} died!`);
-    player.gold += monster.gold;
-    player.xp += monster.xp;
-    console.log ("player Xp: " + player.xp + " player gold: " + player.gold);
+    uiState("Enemy Defeated");
 }
