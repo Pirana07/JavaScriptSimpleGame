@@ -1,5 +1,5 @@
 import { player } from "./player.js";
-// import {monster} from "./ui.js"
+import { Monster } from "./monster.model.js"
 
 export const monsterTypes = [
     {
@@ -11,7 +11,7 @@ export const monsterTypes = [
     },
     {
         name: "orc",
-        health: 25, 
+        health: 25,
         attack: 25,
         gold: 10,
         xp: 4
@@ -33,13 +33,22 @@ export const monsterTypes = [
 ];
 
 
-export function generateMonsters(){
-    let generatedMonster  = monsterTypes[Math.floor(Math.random() * monsterTypes.length)];
+export function generateMonsters() {
+    let generatedMonster = monsterTypes[Math.floor(Math.random() * monsterTypes.length)];
     return structuredClone(generatedMonster); //makes clone of original so original blueprint never changes
 }
 
-// export function enemydied(){
-//     console.log(`${monster.name} died!`);
-//     player.gold += monster.gold;
-//     player.xp += monster.xp;
-// }
+//monster Variable
+export let monster = new Monster(...Object.values(generateMonsters()));
+
+export function spawnMonster() {
+    monster = generateMonsters()
+    alert("You have summond " + monster.name);
+}
+
+
+export function enemydied() {
+    console.log(`${monster.name} died!`);
+    player.gold += monster.gold;
+    player.xp += monster.xp;
+}

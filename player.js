@@ -1,4 +1,5 @@
-import { monster, enemydied } from "./enemy.js";
+import { enemydied } from "./enemy.js";
+import { monster} from "./enemy.js";
 
 export const player = {
     name: "pirana",
@@ -32,5 +33,5 @@ export function attack(){
   }
 }
 export function heal(){
-    player.health = Math.min(Math.floor(Math.random() * player.mana), player.maxHealth);
+    player.health = Math.min(Math.floor(Math.random() * playermana), player.maxHealth);
 }
