@@ -1,9 +1,9 @@
-import { enemydied } from "./enemy.js";
-import { monster} from "./enemy.js";
+import { enemyDefeated } from "./enemy.js";
+import { monster, enemyAttack} from "./enemy.js";
 
 export const player = {
     name: "pirana",
-    health: 100,
+    health: 5,
     maxHealth: 100,
     attack: 5,
     mana: 20,
@@ -29,9 +29,18 @@ export function attack(){
     console.log(monster.name + " has " + monster.health + "hp left!");
 
   if (monster.health <= 0) {
-        enemydied();
+        enemyDefeated();
+  }else{
+    enemyAttack();
   }
 }
+
 export function heal(){
-    player.health = Math.min(Math.floor(Math.random() * playermana), player.maxHealth);
+    player.health = Math.min(player.health + (Math.floor(Math.random() * player.mana)), player.maxHealth);
+    console.log("player healed and has " + player.health + "hp")
+}
+
+export function playerDied(){
+    alert("You died! Refreshing....");
+    location.reload();
 }
