@@ -1,5 +1,6 @@
 import { spawnMonster, monster } from "./enemy.js";
 import { attack, heal, player } from "./player.js";
+import { buySword} from "./shop.js"
 
 const log = document.getElementById("battle-log");
 buttonState("attack-btn", "none");
@@ -7,6 +8,8 @@ buttonState("attack-btn", "none");
 usingButton('spawn-btn', spawnMonster); //monster spawn button
 usingButton('attack-btn', attack); //player attack button
 usingButton('heal-btn', heal); //player attack button
+usingButton('swordUpgrade-btn', buySword); 
+
 
 
 

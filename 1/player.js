@@ -9,7 +9,6 @@ export const player = {
     mana: 20,
     critChance: 0.5,
     critDamage: 1.2,
-    level: 0,
     xp: 0,
     gold: 0,
 }
@@ -19,7 +18,7 @@ export function attack(){
 
     monster.health -= playerDamage();
     usingText("enemyHp-text", "Enemy Hp: " + monster.health);
-    console.log(monster.name + " has " + monster.health + "hp left!");
+    logMessage(monster.name + " has " + monster.health + "hp left!");
     if (monster.health <= 0) {
         enemyDefeated();
      }else{
@@ -28,9 +27,11 @@ export function attack(){
 }
 
 export function heal(){
+    if(player.xp <= 0) return;
     player.health = Math.min(player.health + (Math.floor(Math.random() * player.mana)), player.maxHealth);
     logMessage("player healed and has " + player.health + "hp");
     usingText("health-text", "HP: " + player.health)
+    player.xp -= 1;
 }
 
 export function rewardGain(){
