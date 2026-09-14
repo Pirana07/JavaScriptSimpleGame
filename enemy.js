@@ -1,6 +1,6 @@
 import { player, playerDied, rewardGain } from "./player.js";
 import { Monster } from "./monster.model.js"
-import {uiState, usingText} from "./ui.js"
+import {uiState, usingText, logMessage} from "./ui.js"
 
 export const monsterTypes = [
     {
@@ -49,13 +49,13 @@ export function spawnMonster() {
 
 export function enemyAttack(){
     player.health -= monster.attack;
-    console.log(monster.name + " attacked!");
-    console.log("Player has " + player.health + "hp left!");
+    logMessage(monster.name + " attacked!");
+    logMessage("Player has " + player.health + "hp left!");
     usingText("health-text", "HP: " + player.health)
     if (player.health <= 0) {
         playerDied();
     }else{
-        console.log("players turn!")
+        logMessage("players turn!");
     }
 }
 

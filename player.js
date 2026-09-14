@@ -1,5 +1,5 @@
 import { enemyDefeated, monster, enemyAttack } from "./enemy.js";
-import { uiState, usingText } from "./ui.js";
+import { uiState, usingText, logMessage } from "./ui.js";
 
 export const player = {
     name: "pirana",
@@ -18,7 +18,7 @@ export function attack(){
     if(monster.health <= 0) return;
 
     monster.health -= playerDamage();
-    usingText("enemyHp-text", "Enemy Hp: " + monster.health)
+    usingText("enemyHp-text", "Enemy Hp: " + monster.health);
     console.log(monster.name + " has " + monster.health + "hp left!");
     if (monster.health <= 0) {
         enemyDefeated();
@@ -29,14 +29,14 @@ export function attack(){
 
 export function heal(){
     player.health = Math.min(player.health + (Math.floor(Math.random() * player.mana)), player.maxHealth);
-    console.log("player healed and has " + player.health + "hp");
+    logMessage("player healed and has " + player.health + "hp");
     usingText("health-text", "HP: " + player.health)
 }
 
 export function rewardGain(){
     player.gold += monster.gold;
     player.xp += monster.xp;
-    console.log ("player Xp: " + player.xp + " player gold: " + player.gold);
+    logMessage("player Xp: " + player.xp + " player gold: " + player.gold);
 }
 
 export function playerDied(){

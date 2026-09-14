@@ -1,6 +1,7 @@
 import { spawnMonster, monster } from "./enemy.js";
 import { attack, heal, player } from "./player.js";
 
+const log = document.getElementById("battle-log");
 buttonState("attack-btn", "none");
 
 usingButton('spawn-btn', spawnMonster); //monster spawn button
@@ -23,6 +24,13 @@ export function usingText(textName, text) {
     let textElement = document.getElementById(textName);
     textElement.textContent = text
 }
+
+    export function logMessage(message){
+        let line = document.createElement("p");
+        line.textContent = message;
+        log.appendChild(line);
+
+    }
 
 export function uiState(gameState){
     switch (gameState) {
