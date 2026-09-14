@@ -1,5 +1,5 @@
 import { spawnMonster, monster } from "./enemy.js";
-import { attack, heal } from "./player.js";
+import { attack, heal, player } from "./player.js";
 
 buttonState("attack-btn", "none");
 
@@ -19,15 +19,24 @@ export function buttonState(buttonName, buttonState) {
     button.style.display = buttonState;
 }
 
+export function usingText(textName, text) {
+    let textElement = document.getElementById(textName);
+    textElement.textContent = text
+}
 
 export function uiState(gameState){
     switch (gameState) {
         case "Spawn Enemy":
             alert("You have summond " + monster.name);
             buttonState("attack-btn", "");
+            usingText("enemy-text", "\\. " + monster.name + " ./");
+            usingText("enemyHp-text", "Enemy Hp: " + monster.health)
             break;
         case "Enemy Defeated":
             buttonState("attack-btn", "none");
+            usingText("xp-text", "XP: " + player.xp);
+            usingText("enemyHp-text", "Enemy Defeated")
+
             break;
         case "Game Over":
             alert("You died! Refreshing....");
